@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenDeepSpace.Demo.Service.Aop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace OpenDeepSpace.Demo.Services.BasicInterfaceBatchInjection
     /// </summary>
     public interface ITransientServiceA
     {
+        
         public void Business();
+
     }
 }

@@ -1,6 +1,8 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 using OpenDeepSpace.Demo.Api.Filters;
+using OpenDeepSpace.Demo.Services.BasicAttributeBatchInjection;
+using OpenDeepSpace.Demo.Services.BasicInterfaceBatchInjection;
 using OpenDeepSpace.NetCore.Autofacastle.DependencyInjection;
 using OpenDeepSpace.NetCore.Autofacastle.Extensions;
 
@@ -19,11 +21,22 @@ builder.Services.AddSwaggerGen();
         
 });//使用Autofacastle*/
 
+/*builder.Host.UseAutofacastle(classInterceptSelectors: new List<OpenDeepSpace.NetCore.Autofacastle.AspectAttention.ClassInterceptSelector>()
+{
+    new OpenDeepSpace.NetCore.Autofacastle.AspectAttention.ClassInterceptSelector(t=>t.GetInterfaces().Any(t=>t==typeof(ITransientServiceA)))
+});*/
+
+builder.Host.UseAutofacastle(automaticInjectionSelectors: new List<OpenDeepSpace.NetCore.Autofacastle.DependencyInjection.AutomaticInjectionSelector>() {
+
+    new OpenDeepSpace.NetCore.Autofacastle.DependencyInjection.AutomaticInjectionSelector(t=>t.BaseType==typeof(ITransientServiceB))
+
+});
+
 builder.Host.UseAutofacastle();
 
 builder.Services.AddMvcCore(op => {
 
-    op.Filters.Add<IocManagerFilter>();
+    //op.Filters.Add<IocManagerFilter>();
 });
 
 //未使用特性或接口注入的类，自己手动注入的类需要使用拦截可以采用如下方式

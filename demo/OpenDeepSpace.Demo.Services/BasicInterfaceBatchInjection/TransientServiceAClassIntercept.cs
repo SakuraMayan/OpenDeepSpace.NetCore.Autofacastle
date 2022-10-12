@@ -1,4 +1,5 @@
 ﻿using OpenDeepSpace.Demo.Service.Aop;
+using OpenDeepSpace.NetCore.Autofacastle.AspectAttention.Attributes;
 using OpenDeepSpace.NetCore.Autofacastle.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -8,21 +9,22 @@ using System.Threading.Tasks;
 
 namespace OpenDeepSpace.Demo.Services.BasicInterfaceBatchInjection
 {
-    /// <summary>
-    /// 瞬时的TransientServiceA 每次产生一个新的实例
-    /// </summary>
-    [Log2Before(GroupName ="第二组日志")]
-    public class TransientServiceA : ITransientServiceA,ITransient
+    [ClassIntercept]
+    public class TransientServiceAClassIntercept : IDisposable,ITransient
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
 
         [LogBefore]
         [LogAfter]
         [LogAfterReturn]
         [LogThrow]
-        public void Business()
+        public virtual void BusinessException()
         {
-            Console.WriteLine($"{nameof(TransientServiceA)}.{nameof(Business)} Id:{Id}");
+            throw new Exception("类拦截虚方法业务异常了");
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }
