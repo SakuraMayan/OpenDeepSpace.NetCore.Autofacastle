@@ -13,6 +13,10 @@ namespace OpenDeepSpace.Demo.Api.Controllers
     [AutomaticInjection]
     public class BasicAttributeBatchInjectionController : ControllerBase
     {
+
+        [NonAutomaticInjection]
+        public int i { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

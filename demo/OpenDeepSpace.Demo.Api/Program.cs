@@ -1,3 +1,7 @@
+using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc;
+using OpenDeepSpace.Demo.Api.Filters;
+using OpenDeepSpace.NetCore.Autofacastle.DependencyInjection;
 using OpenDeepSpace.NetCore.Autofacastle.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,11 +13,27 @@ builder.Services.AddControllers().AddControllersAsServices();//AddControllersAsS
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Host.UseAutofacastle();//使用Autofacastle
+/*builder.Host.UseAutofacastle(automaticInjectionSelectors:new List<OpenDeepSpace.NetCore.Autofacastle.DependencyInjection.AutomaticInjectionSelector>() { 
+
+    new OpenDeepSpace.NetCore.Autofacastle.DependencyInjection.AutomaticInjectionSelector(t=>t.BaseType==typeof(ControllerBase))
+        
+});//使用Autofacastle*/
+
+builder.Host.UseAutofacastle();
+
+builder.Services.AddMvcCore(op => {
+
+    op.Filters.Add<IocManagerFilter>();
+});
 
 //未使用特性或接口注入的类，自己手动注入的类需要使用拦截可以采用如下方式
 
 var app = builder.Build();
+
+//(app.Services as AutofacServiceProvider).LifetimeScope
+//app.Services.GetAutofacRoot()
+//使用IocManager
+IocManager.InitContainer(app.Services.GetAutofacRoot());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -21,6 +41,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
 
 app.UseAuthorization();
 
