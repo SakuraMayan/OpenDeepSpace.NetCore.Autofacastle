@@ -22,6 +22,8 @@ namespace OpenDeepSpace.Demo.Api.Controllers
 
         private readonly ExternalService externalService;
 
+        private readonly OrdinaryClassIntercept ordinaryClassIntercept;
+
         /// <summary>
         /// 
         /// </summary>
@@ -57,6 +59,16 @@ namespace OpenDeepSpace.Demo.Api.Controllers
         public void TestExternalServiceLog()
         { 
             externalService.Business();
+        }
+
+        /// <summary>
+        /// 测试常规的类拦截
+        /// </summary>
+        [HttpGet]
+        public void TestOrdinaryClassIntercept()
+        { 
+            ordinaryClassIntercept.Business();
+            ordinaryClassIntercept.BusinessOne();
         }
     }
 }

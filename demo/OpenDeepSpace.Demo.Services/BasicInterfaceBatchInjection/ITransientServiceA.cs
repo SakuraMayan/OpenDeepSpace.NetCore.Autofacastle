@@ -12,7 +12,10 @@ namespace OpenDeepSpace.Demo.Services.BasicInterfaceBatchInjection
     /// </summary>
     public interface ITransientServiceA
     {
-        
+        [LogBefore]
+        [LogAfter]
+        [LogAfterReturn]
+        [LogThrow]
         public void Business();
 
     }
