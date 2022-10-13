@@ -12,7 +12,7 @@ namespace OpenDeepSpace.Demo.Service.Aop
     /// <summary>
     /// 日志拦截点
     /// </summary>
-    //[InterceptPoint("intercept(* * * * (..))")]
+    [InterceptPoint("intercept(* * * * (..))")]
     public class LogInterceptPoint:AbstractInterceptPoint
     {
 

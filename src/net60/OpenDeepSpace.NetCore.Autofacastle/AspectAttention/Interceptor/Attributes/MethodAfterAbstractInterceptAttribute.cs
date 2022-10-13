@@ -8,7 +8,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.AspectAttention.Interceptor.Attribu
     /// <summary>
     /// 方法执行完成之后执行 无论是否存在异常都会执行
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Interface)]
     public abstract class MethodAfterAbstractInterceptAttribute : MethodInterceptBaseAttribute
     {
         /// <summary>

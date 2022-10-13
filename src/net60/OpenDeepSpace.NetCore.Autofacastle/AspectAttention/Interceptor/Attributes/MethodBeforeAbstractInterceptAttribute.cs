@@ -8,7 +8,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.AspectAttention.Interceptor.Attribu
     /// <summary>
     /// 方法前拦截特性
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Interface)]
     public abstract class MethodBeforeAbstractInterceptAttribute : MethodInterceptBaseAttribute
     {
 

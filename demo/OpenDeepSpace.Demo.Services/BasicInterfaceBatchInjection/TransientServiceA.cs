@@ -12,12 +12,13 @@ namespace OpenDeepSpace.Demo.Services.BasicInterfaceBatchInjection
     /// <summary>
     /// 瞬时的TransientServiceA 每次产生一个新的实例
     /// </summary>
-    [Log2Before(GroupName ="第二组日志")]
     public class TransientServiceA : ITransientServiceA,ITransient
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        //[NonIntercept]
+        [NonIntercept]
+        //[LogBefore]
+        //[LogAfter]
         public void Business()
         {
             Console.WriteLine($"{nameof(TransientServiceA)}.{nameof(Business)} Id:{Id}");

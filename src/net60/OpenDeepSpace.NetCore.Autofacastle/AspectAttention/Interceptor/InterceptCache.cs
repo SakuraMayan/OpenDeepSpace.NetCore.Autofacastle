@@ -47,6 +47,18 @@ namespace OpenDeepSpace.NetCore.Autofacastle.AspectAttention.Interceptor
                 var methodInfos = needInterceptClass.InterceptedType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                     .Where(m => !m.IsSpecialName);
 
+                //如果是接口拦截 获取接口上的方法 以及接口上的拦截特性
+                List<MethodInfo> interfaceMethods = new List<MethodInfo>();
+                List<Attribute> interfaceInterceptAttrs = new List<Attribute>();
+                if (needInterceptClass.InterceptType == Enums.InterceptType.InterfaceIntercept)
+                { 
+                    
+                    interfaceMethods=needInterceptClass.InterceptedType.GetInterfaces().SelectMany(t=>t.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                    .Where(m => !m.IsSpecialName)).ToList();
+
+                    interfaceInterceptAttrs = needInterceptClass.InterceptedType.GetInterfaces().SelectMany(t => t.GetCustomAttributes().SelectInterceptAttrs()).Distinct().ToList();
+                }
+
                 //类上标记的拦截特性
                 var classAttributes = needInterceptClass.InterceptedType.GetCustomAttributes().SelectInterceptAttrs();
 
@@ -57,16 +69,24 @@ namespace OpenDeepSpace.NetCore.Autofacastle.AspectAttention.Interceptor
                     if (method.GetCustomAttribute<NonInterceptAttribute>() != null)
                         continue;
 
+                    //如果是接口拦截 查看接口拦截上方法上是否存在拦截特性
+                    List<Attribute> interfaceMethodAttributes = new List<Attribute>();
+                    if (interfaceMethods.Any())
+                    {
+                        var interfaceMethod = interfaceMethods.FirstOrDefault(t => t.ReturnType==method.ReturnType && t.Name==method.Name && t.GetParameters().Length==method.GetParameters().Length && t.GetParameters().All(t=>method.GetParameters().Contains(t)));
+                        if (interfaceMethod != null)
+                            interfaceMethodAttributes = interfaceMethod.GetCustomAttributes().ToList();
+                    }
 
                     //获取所有attribute
                     var methodAttributes = method.GetCustomAttributes().SelectInterceptAttrs();
 
                     //如果没有任何需要拦截的标记 以及类上也没有标记跳过
-                    if (!methodAttributes.Any() && !classAttributes.Any())
+                    if (!interfaceMethodAttributes.Any() && !interfaceInterceptAttrs.Any() && !methodAttributes.Any() && !classAttributes.Any())
                         continue;
 
                     //组合所有拦截特性 去掉重复的
-                    var allInterceptAttributes = classAttributes.Union(methodAttributes);
+                    var allInterceptAttributes = classAttributes.Union(methodAttributes).Union(interfaceMethodAttributes).Union(interfaceInterceptAttrs);
 
                     var interceptInvokeChainBuilder = new InterceptInvokeChainBuilder()
                     {

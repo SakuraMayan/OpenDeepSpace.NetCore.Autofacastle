@@ -196,6 +196,17 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
             if (type.IsNonIntercept())//是否不拦截
                 return false;
 
+            //判断是否为接口拦截
+            if (type.IsInterfaceIntercept())
+            {
+                //是接口拦截还需要看接口上或接口对应的方法上是否标有拦截特性
+                return type.GetCustomAttributes().SelectInterceptAttrs().Any() || type.GetMethodsAttributes().SelectInterceptAttrs().Any()
+                    || type.GetInterfaces().SelectMany(t => t.GetCustomAttributes().SelectInterceptAttrs()).Any()
+                    || type.GetInterfaces().SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                    .Where(m => !m.IsSpecialName).SelectMany(t => t.GetCustomAttributes().SelectInterceptAttrs())).Any();
+
+            }
+
             //存在拦截特性
             return type.GetCustomAttributes().SelectInterceptAttrs().Any() || type.GetMethodsAttributes().SelectInterceptAttrs().Any();
         }
