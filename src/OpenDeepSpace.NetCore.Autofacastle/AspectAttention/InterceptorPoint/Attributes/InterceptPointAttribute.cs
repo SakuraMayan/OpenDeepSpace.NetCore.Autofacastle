@@ -16,7 +16,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.AspectAttention.InterceptorPoint.At
     public class InterceptPointAttribute : Attribute
     {
         //拦截表达式判断
-        private static readonly Regex RegexInterceptExpression = new(@"^intercept[(][\?%*._a-zA-Z0-9]+[\s+][\?%*._a-zA-Z0-9]+[\s+][\?%*._a-zA-Z0-9]+[\s+][\?%*._a-zA-Z0-9]+[\s+]([(][?%*.,_a-zA-Z0-9]+[)]|[(][)])[)]");
+        private static readonly Regex RegexInterceptExpression = new Regex(@"^intercept[(][\?%*._a-zA-Z0-9]+[\s+][\?%*._a-zA-Z0-9]+[\s+][\?%*._a-zA-Z0-9]+[\s+][\?%*._a-zA-Z0-9]+[\s+]([(][?%*.,_a-zA-Z0-9]+[)]|[(][)])[)]");
 
         /// <summary>
         /// 分组
@@ -66,7 +66,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.AspectAttention.InterceptorPoint.At
         /// <summary>
         /// 方法参数类型字典 key为方法参数下标位置 v为对应的参数类型
         /// </summary>
-        private readonly Dictionary<int, string> methodParamsTypeDic = new();
+        private readonly Dictionary<int, string> methodParamsTypeDic = new Dictionary<int, string>();
 
 
         /// <summary>

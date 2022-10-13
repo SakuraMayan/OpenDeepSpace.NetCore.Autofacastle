@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
+  </PropertyGroup>
+
+
+	<!--相同版本依赖-->
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="6.4.0" />
+		<PackageReference Include="Castle.Core" Version="5.1.0" />
+	</ItemGroup>
+	
+	<!--多目标框架不同版本依赖的处理-->
+	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+		
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.30" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.30" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.30" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="3.1.30" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.30" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="3.1.30" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.30" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.30" />
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.25" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.30" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="3.1.30" />
+	</ItemGroup>
+
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+	</ItemGroup>
+
+</Project>

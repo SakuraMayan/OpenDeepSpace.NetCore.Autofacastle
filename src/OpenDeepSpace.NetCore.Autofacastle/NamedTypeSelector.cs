@@ -1,4 +1,6 @@
-﻿namespace OpenDeepSpace.NetCore.Autofacastle
+﻿using System;
+
+namespace OpenDeepSpace.NetCore.Autofacastle
 {
     /// <summary>
     /// 筛选器

@@ -7,21 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{412570FD-38B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{74387AA5-713D-4F58-98D3-FC0E17F7EEF4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net31", "net31", "{2CF579C5-6FED-4134-AC12-87D5C1293EAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenDeepSpace.Demo.Api", "demo\OpenDeepSpace.Demo.Api\OpenDeepSpace.Demo.Api.csproj", "{2AACA11B-BF82-4269-9EAB-B04469A7376A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeepSpace.NetCore.Autofacastle", "src\net31\OpenDeepSpace.NetCore.Autofacastle\OpenDeepSpace.NetCore.Autofacastle.csproj", "{43E634A9-3AB1-4448-A71B-FF9B1C3D7CAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenDeepSpace.Demo.Services", "demo\OpenDeepSpace.Demo.Services\OpenDeepSpace.Demo.Services.csproj", "{707B06AF-7191-42F3-A2D5-A36144DEEAFB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net50", "net50", "{819CCE2F-1BF9-4170-8DE2-3706AEF92D31}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net60", "net60", "{50D82FC0-AEBD-4209-BE63-00B56E12104C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeepSpace.NetCore.Autofacastle", "src\net50\OpenDeepSpace.NetCore.Autofacastle\OpenDeepSpace.NetCore.Autofacastle.csproj", "{BD9037E3-665B-4286-ADBF-1693B332E6C1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeepSpace.NetCore.Autofacastle", "src\net60\OpenDeepSpace.NetCore.Autofacastle\OpenDeepSpace.NetCore.Autofacastle.csproj", "{B18B6ADA-3DF7-4454-91F7-CF866B0E13DD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeepSpace.Demo.Api", "demo\OpenDeepSpace.Demo.Api\OpenDeepSpace.Demo.Api.csproj", "{2AACA11B-BF82-4269-9EAB-B04469A7376A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeepSpace.Demo.Services", "demo\OpenDeepSpace.Demo.Services\OpenDeepSpace.Demo.Services.csproj", "{707B06AF-7191-42F3-A2D5-A36144DEEAFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenDeepSpace.NetCore.Autofacastle", "src\OpenDeepSpace.NetCore.Autofacastle\OpenDeepSpace.NetCore.Autofacastle.csproj", "{65E5C1EA-C6FB-4662-8DC0-FA9410C5C1AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,18 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{43E634A9-3AB1-4448-A71B-FF9B1C3D7CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43E634A9-3AB1-4448-A71B-FF9B1C3D7CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43E634A9-3AB1-4448-A71B-FF9B1C3D7CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43E634A9-3AB1-4448-A71B-FF9B1C3D7CAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BD9037E3-665B-4286-ADBF-1693B332E6C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD9037E3-665B-4286-ADBF-1693B332E6C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD9037E3-665B-4286-ADBF-1693B332E6C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD9037E3-665B-4286-ADBF-1693B332E6C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B18B6ADA-3DF7-4454-91F7-CF866B0E13DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B18B6ADA-3DF7-4454-91F7-CF866B0E13DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B18B6ADA-3DF7-4454-91F7-CF866B0E13DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B18B6ADA-3DF7-4454-91F7-CF866B0E13DD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2AACA11B-BF82-4269-9EAB-B04469A7376A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2AACA11B-BF82-4269-9EAB-B04469A7376A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AACA11B-BF82-4269-9EAB-B04469A7376A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,19 +27,18 @@ Global
 		{707B06AF-7191-42F3-A2D5-A36144DEEAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{707B06AF-7191-42F3-A2D5-A36144DEEAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{707B06AF-7191-42F3-A2D5-A36144DEEAFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E5C1EA-C6FB-4662-8DC0-FA9410C5C1AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E5C1EA-C6FB-4662-8DC0-FA9410C5C1AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E5C1EA-C6FB-4662-8DC0-FA9410C5C1AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E5C1EA-C6FB-4662-8DC0-FA9410C5C1AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2CF579C5-6FED-4134-AC12-87D5C1293EAA} = {412570FD-38B9-4727-95B7-A20C29726E1C}
-		{43E634A9-3AB1-4448-A71B-FF9B1C3D7CAD} = {2CF579C5-6FED-4134-AC12-87D5C1293EAA}
-		{819CCE2F-1BF9-4170-8DE2-3706AEF92D31} = {412570FD-38B9-4727-95B7-A20C29726E1C}
-		{50D82FC0-AEBD-4209-BE63-00B56E12104C} = {412570FD-38B9-4727-95B7-A20C29726E1C}
-		{BD9037E3-665B-4286-ADBF-1693B332E6C1} = {819CCE2F-1BF9-4170-8DE2-3706AEF92D31}
-		{B18B6ADA-3DF7-4454-91F7-CF866B0E13DD} = {50D82FC0-AEBD-4209-BE63-00B56E12104C}
 		{2AACA11B-BF82-4269-9EAB-B04469A7376A} = {74387AA5-713D-4F58-98D3-FC0E17F7EEF4}
 		{707B06AF-7191-42F3-A2D5-A36144DEEAFB} = {74387AA5-713D-4F58-98D3-FC0E17F7EEF4}
+		{65E5C1EA-C6FB-4662-8DC0-FA9410C5C1AC} = {412570FD-38B9-4727-95B7-A20C29726E1C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBB66EF2-56C3-43F1-943E-48B410BFB90A}

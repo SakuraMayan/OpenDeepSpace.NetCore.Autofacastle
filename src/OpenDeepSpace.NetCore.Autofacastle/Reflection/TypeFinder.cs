@@ -21,7 +21,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Reflection
         private static readonly string SystemNugetAllTypes = $"{nameof(SystemNugetAllTypes)}";
 
         //缓存
-        private static readonly ConcurrentDictionary<string, List<Type>> typesCache = new();
+        private static readonly ConcurrentDictionary<string, List<Type>> typesCache = new ConcurrentDictionary<string, List<Type>>();
 
         /// <summary>
         /// 获取所有类型
@@ -78,7 +78,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Reflection
         /// <returns></returns>
         private static List<Type> CollectionType(List<Assembly> assemblies)
         {
-            List<Type> list = new();
+            List<Type> list = new List<Type>();
             foreach (var assembly in assemblies)
             {
                 var typeinfos = assembly.DefinedTypes;

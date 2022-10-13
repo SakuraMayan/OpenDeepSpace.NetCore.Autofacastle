@@ -327,7 +327,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
         /// <returns></returns>
         public static IServiceCollection ReplaceService(this IServiceCollection services,Type serviceType,Type implementationType, ServiceLifetime lifetime)
         {
-            ServiceDescriptor descriptor = new(serviceType, implementationType, lifetime);
+            ServiceDescriptor descriptor = new ServiceDescriptor(serviceType, implementationType, lifetime);
             services.Replace(descriptor);
             return services;
         }

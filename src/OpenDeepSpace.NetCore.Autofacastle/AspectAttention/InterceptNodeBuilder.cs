@@ -11,7 +11,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.AspectAttention
     /// </summary>
     public class InterceptNodeBuilder
     {
-        private readonly LinkedList<InterceptNode> interceptNodes = new();
+        private readonly LinkedList<InterceptNode> interceptNodes = new LinkedList<InterceptNode>();
 
         /// <summary>
         /// 新增拦截器链

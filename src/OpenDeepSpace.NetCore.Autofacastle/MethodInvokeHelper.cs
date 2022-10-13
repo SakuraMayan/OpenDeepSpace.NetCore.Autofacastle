@@ -37,7 +37,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle
 
             //自动类型注入
 
-            List<object> parameterObj = new();
+            List<object> parameterObj = new List<object>();
             foreach (var parameter in parameters)
             {
                 if (invocation != null && parameter.ParameterType == typeof(InterceptContext))

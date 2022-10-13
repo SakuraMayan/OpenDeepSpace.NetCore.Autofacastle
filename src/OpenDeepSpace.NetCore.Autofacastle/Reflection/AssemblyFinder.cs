@@ -23,7 +23,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Reflection
         private static readonly string SystemNugetAllAssmeblies = $"{nameof(SystemNugetAllAssmeblies)}";
 
         //缓存
-        private static readonly ConcurrentDictionary<string, List<Assembly>> assembliesCache = new();
+        private static readonly ConcurrentDictionary<string, List<Assembly>> assembliesCache = new ConcurrentDictionary<string, List<Assembly>>();
 
         /// <summary>
         /// 获取项目所有程序集
@@ -95,7 +95,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Reflection
         /// <param name="libs"></param>
         private static List<Assembly> CollectionAssembly(IReadOnlyList<CompilationLibrary> libs)
         {
-            List<Assembly> list = new();
+            List<Assembly> list = new List<Assembly>();
             foreach (var lib in libs)
             {
                 try

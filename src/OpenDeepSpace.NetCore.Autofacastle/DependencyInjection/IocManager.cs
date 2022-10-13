@@ -13,7 +13,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.DependencyInjection
     /// </summary>
     public class IocManager
     {
-        private static readonly object obj = new();
+        private static readonly object obj = new object();
         private static ILifetimeScope? Container { get; set; }
 
         //单例模式
@@ -49,12 +49,12 @@ namespace OpenDeepSpace.NetCore.Autofacastle.DependencyInjection
         /// </summary>
         /// <typeparam name="TService"></typeparam>
         /// <returns></returns>
-        public static TService? TryResolve<TService>() where TService : class
+        public static TService TryResolve<TService>() where TService : class
         {
 
             if (Container == null)
                 throw new ArgumentException(nameof(Container));
-            Container.TryResolve(out TService? instance);
+            Container.TryResolve(out TService instance);
 
             return instance;
         }
@@ -76,7 +76,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.DependencyInjection
             if (ImplementationType == null)
                 throw new ArgumentNullException(nameof(ImplementationType));
 
-            TService? instance =default;
+            TService instance =default;
 
             //从Keyed中解析
             if(resolveMode==ResolveMode.Keyed)
@@ -99,7 +99,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.DependencyInjection
         /// <typeparam name="TService"></typeparam>
         /// <param name="ImplementationType"></param>
         /// <returns></returns>
-        public static TService? TryResolve<TService>(Type ImplementationType) where TService : class
+        public static TService TryResolve<TService>(Type ImplementationType) where TService : class
         {
             if (Container == null)
                 throw new ArgumentException(nameof(Container));
@@ -107,7 +107,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.DependencyInjection
                 throw new ArgumentNullException(nameof(ImplementationType));
 
             //优先从Keyed中尝试解析
-            Container.TryResolveKeyed(ImplementationType, out TService? instance);
+            Container.TryResolveKeyed(ImplementationType, out TService instance);
 
             //如果keyed中解析不出来 尝试从Named中解析
             if (ImplementationType.FullName != null && instance != null)
@@ -119,7 +119,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.DependencyInjection
                 Container.TryResolve(ImplementationType, out object? instanceValue);
 
                 if (instanceValue != null)
-                    instance = (TService?)instanceValue;
+                    instance = (TService)instanceValue;
             }
 
             return instance;
@@ -152,7 +152,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.DependencyInjection
         /// <typeparam name="TService"></typeparam>
         /// <param name="Keyed"></param>
         /// <returns></returns>
-        public static TService? TryResolve<TService>(object Keyed) where TService : notnull
+        public static TService TryResolve<TService>(object Keyed) where TService : notnull
         {
             if (Container == null)
                 throw new ArgumentException(nameof(Container));
@@ -161,7 +161,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.DependencyInjection
 
             Container.TryResolveKeyed(Keyed, out object? instance);
 
-            return (TService?)instance;
+            return (TService)instance;
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.DependencyInjection
         /// <typeparam name="TService"></typeparam>
         /// <param name="Named"></param>
         /// <returns></returns>
-        public static TService? TryResolve<TService>(string Named) where TService : notnull
+        public static TService TryResolve<TService>(string Named) where TService : notnull
         {
             if (Container == null)
                 throw new ArgumentException(nameof(Container));
@@ -199,7 +199,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.DependencyInjection
 
             Container.TryResolveNamed(Named, out object? instance);
 
-            return (TService?)instance;
+            return (TService)instance;
         }
 
 

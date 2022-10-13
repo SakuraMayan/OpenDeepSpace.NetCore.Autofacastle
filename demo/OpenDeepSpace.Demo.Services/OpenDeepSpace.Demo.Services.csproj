@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\net60\OpenDeepSpace.NetCore.Autofacastle\OpenDeepSpace.NetCore.Autofacastle.csproj" />
+    <ProjectReference Include="..\..\src\OpenDeepSpace.NetCore.Autofacastle\OpenDeepSpace.NetCore.Autofacastle.csproj" />
   </ItemGroup>
 
 </Project>

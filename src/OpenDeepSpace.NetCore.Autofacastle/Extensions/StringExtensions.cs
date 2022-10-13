@@ -26,7 +26,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                 isNotCharSetOn = false;
             int lastWildCard = -1;
             int patternIndex = 0;
-            List<char> set = new();
+            List<char> set = new List<char>();
             char p = '\0';
             bool endOfPattern;
             for (int i = 0; i < str.Length; i++)
