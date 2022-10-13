@@ -20,6 +20,8 @@ namespace OpenDeepSpace.Demo.Api.Controllers
 
         private readonly ITransientServiceB transientServiceB;
 
+        private readonly ExternalService externalService;
+
         [HttpGet]
         public void Test()
         {
@@ -31,6 +33,12 @@ namespace OpenDeepSpace.Demo.Api.Controllers
         public void TestInterceptPoint()
         { 
             transientServiceB.Business();
+        }
+
+        [HttpGet]
+        public void TestExternalServiceLog()
+        { 
+            externalService.Business();
         }
     }
 }

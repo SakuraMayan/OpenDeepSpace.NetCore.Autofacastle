@@ -1,3 +1,4 @@
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 using OpenDeepSpace.Demo.Api.Filters;
@@ -26,13 +27,20 @@ builder.Services.AddSwaggerGen();
     new OpenDeepSpace.NetCore.Autofacastle.AspectAttention.ClassInterceptSelector(t=>t.GetInterfaces().Any(t=>t==typeof(ITransientServiceA)))
 });*/
 
-builder.Host.UseAutofacastle(automaticInjectionSelectors: new List<OpenDeepSpace.NetCore.Autofacastle.DependencyInjection.AutomaticInjectionSelector>() {
+/*builder.Host.UseAutofacastle(automaticInjectionSelectors: new List<OpenDeepSpace.NetCore.Autofacastle.DependencyInjection.AutomaticInjectionSelector>() {
 
     new OpenDeepSpace.NetCore.Autofacastle.DependencyInjection.AutomaticInjectionSelector(t=>t.BaseType==typeof(ITransientServiceB))
 
-});
+});*/
 
 builder.Host.UseAutofacastle();
+
+builder.Host.ConfigureContainer<ContainerBuilder>(container => {
+
+    //外部手动注入服务实例的添加拦截
+    container.RegisterType(typeof(ExternalService)).AddIntercept(typeof(ExternalService));
+
+});
 
 builder.Services.AddMvcCore(op => {
 
