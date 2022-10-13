@@ -20,8 +20,9 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
         /// </summary>
         /// <param name="registrationBuilder"></param>
         /// <param name="implementationType"></param>
+        /// <param name="Intercepted">是否可被重复添加拦截</param>
         /// <returns></returns>
-        public static IRegistrationBuilder<object, ReflectionActivatorData, DynamicRegistrationStyle> AddIntercept(this IRegistrationBuilder<object, ReflectionActivatorData, DynamicRegistrationStyle> registrationBuilder, Type implementationType)
+        public static IRegistrationBuilder<object, ReflectionActivatorData, DynamicRegistrationStyle> AddIntercept(this IRegistrationBuilder<object, ReflectionActivatorData, DynamicRegistrationStyle> registrationBuilder, Type implementationType,bool Intercepted = true)
         {
             var interceptedTypeInfo = AutofacastleCollection.InterceptedTypeInfos.FirstOrDefault(t => t.InterceptedType == implementationType && t.Intercepted==false);
             if (interceptedTypeInfo != null)
@@ -43,7 +44,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                         default:
                             break;
                     }
-                    interceptedTypeInfo.Intercepted = true;
+                    interceptedTypeInfo.Intercepted = !Intercepted;
                     return registrationBuilder;
                 }
 
@@ -65,7 +66,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                         default:
                             break;
                     }
-                    interceptedTypeInfo.Intercepted = true;
+                    interceptedTypeInfo.Intercepted = !Intercepted;
                 }
             }
             return registrationBuilder;
@@ -76,8 +77,9 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
         /// </summary>
         /// <param name="registrationBuilder"></param>
         /// <param name="implementationType"></param>
+        /// <param name="Intercepted">是否可被重复添加拦截</param>
         /// <returns></returns>
-        public static IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> AddIntercept(this IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> registrationBuilder, Type implementationType)
+        public static IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> AddIntercept(this IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> registrationBuilder, Type implementationType,bool Intercepted=true)
         {
             var interceptedTypeInfo = AutofacastleCollection.InterceptedTypeInfos.FirstOrDefault(t => t.InterceptedType == implementationType && t.Intercepted==false);
             if (interceptedTypeInfo != null)
@@ -99,7 +101,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                         default:
                             break;
                     }
-                    interceptedTypeInfo.Intercepted = true;
+                    interceptedTypeInfo.Intercepted = !Intercepted;
                     return registrationBuilder;
                 }
 
@@ -122,7 +124,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                             break;
                     }
                 }
-                interceptedTypeInfo.Intercepted = true;
+                interceptedTypeInfo.Intercepted =  !Intercepted;
             }
             return registrationBuilder;
 

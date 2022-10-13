@@ -36,9 +36,7 @@ builder.Services.AddSwaggerGen();
 
 });*/
 
-//builder.Host.UseAutofacastle();
-
-//
+builder.Host.UseAutofacastle();
 builder.Host.ConfigureContainer<ContainerBuilder>(container =>
 {
 
@@ -48,7 +46,19 @@ builder.Host.ConfigureContainer<ContainerBuilder>(container =>
     //外部手动注入服务实例的添加拦截
     container.RegisterType(typeof(ExternalService)).AddIntercept(typeof(ExternalService));
 
-}).UseServiceProviderFactory(new AutofacastleServiceProviderFactory());
+});
+
+//
+/*builder.Host.ConfigureContainer<ContainerBuilder>(container =>
+{
+
+    //自己传入程序集
+    var assemblies = AssemblyFinder.GetAllAssemblies().Where(assembly => !assembly.FullName.StartsWith("Microsoft") && !assembly.FullName.StartsWith("System"));
+    container.UseAutofacastle(assemblies: assemblies.ToList(), IsConfigureIntercept: true);
+    //外部手动注入服务实例的添加拦截
+    container.RegisterType(typeof(ExternalService)).AddIntercept(typeof(ExternalService));
+
+}).UseServiceProviderFactory(new AutofacastleServiceProviderFactory());*/
 
 builder.Services.AddMvcCore(op => {
 

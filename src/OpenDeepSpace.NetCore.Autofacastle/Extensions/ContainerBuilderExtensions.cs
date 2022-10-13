@@ -127,7 +127,8 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                     registrationBuilder = AsServiceForGenericType(type, transientAttr, registrationBuilder, service);
                                     //设置生命周期
                                     registrationBuilder.InstancePerDependency();
-                                   
+
+                                  
                                 }
                                 
                             }
@@ -138,12 +139,13 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                     registrationBuilder = AsServiceForGenericType(type, transientAttr, registrationBuilder, service);
                                     //设置生命周期
                                     registrationBuilder.InstancePerDependency();
-                                    
+
+                                   
                                 }
                             }
                             //配置拦截
                             if (IsConfigureIntercept)
-                                registrationBuilder.AddIntercept(type);
+                                registrationBuilder.AddIntercept(type,false);
                         }
 
 
@@ -161,7 +163,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
 
                                 //设置生命周期
                                 registrationBuilder.InstancePerDependency();
-                                
+
                             }
                             
                         }
@@ -172,12 +174,12 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                 registrationBuilder = AsService(type, transientAttr, registrationBuilder, service);
                                 //设置生命周期
                                 registrationBuilder.InstancePerDependency();
-                                
+
                             }
                         }
                         //配置拦截
                         if (IsConfigureIntercept)
-                            registrationBuilder.AddIntercept(type);
+                            registrationBuilder.AddIntercept(type,false);
                     }
 
                 }
@@ -203,6 +205,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
 
                                     //设置生命周期
                                     registrationBuilder.InstancePerLifetimeScope();
+
                                    
                                 }
                                
@@ -214,13 +217,14 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                     registrationBuilder = AsServiceForGenericType(type, scopedAttr, registrationBuilder, service);
                                     //设置生命周期
                                     registrationBuilder.InstancePerLifetimeScope();
-                                  
+
+                                   
                                 }
                                 
                             }
                             //配置拦截
                             if (IsConfigureIntercept)
-                                registrationBuilder.AddIntercept(type);
+                                registrationBuilder.AddIntercept(type, false);
                         }
 
 
@@ -238,7 +242,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
 
                                 //设置生命周期
                                 registrationBuilder.InstancePerLifetimeScope();
-                                
+
                             }
                             
                         }
@@ -249,12 +253,12 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                 registrationBuilder = AsService(type, scopedAttr, registrationBuilder, service);
                                 //设置生命周期
                                 registrationBuilder.InstancePerLifetimeScope();
-                               
+
                             }
                         }
                         //配置拦截
                         if (IsConfigureIntercept)
-                            registrationBuilder.AddIntercept(type);
+                            registrationBuilder.AddIntercept(type, false);
                     }
                 }
 
@@ -279,7 +283,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
 
                                     //设置生命周期
                                     registrationBuilder.SingleInstance();
-                                    
+
                                 }
                                
                             }
@@ -290,13 +294,14 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                     registrationBuilder = AsServiceForGenericType(type, singletonAttr, registrationBuilder, service);
                                     //设置生命周期
                                     registrationBuilder.SingleInstance();
+
                                     
                                 }
                                 
                             }
                             //配置拦截
                             if (IsConfigureIntercept)
-                                registrationBuilder.AddIntercept(type);
+                                registrationBuilder.AddIntercept(type, false);
                         }
 
 
@@ -317,7 +322,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
 
                                 //设置生命周期
                                 registrationBuilder.SingleInstance();
-                                
+
                             }
                          
                         }
@@ -330,13 +335,13 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                     registrationBuilder.AutoActivate();//预加载
                                 //设置生命周期
                                 registrationBuilder.SingleInstance();
-                               
+
                             }
                             
                         }
                         //配置拦截
                         if (IsConfigureIntercept)
-                            registrationBuilder.AddIntercept(type);
+                            registrationBuilder.AddIntercept(type, false);
                     }
                 }
             }
