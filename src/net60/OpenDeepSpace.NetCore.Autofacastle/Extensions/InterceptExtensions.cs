@@ -286,6 +286,10 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                 //检查方法拦截 包含基类的方法
                 foreach (var methodInfo in type.GetAllInstanceMethod(true))
                 {
+                    //方法上标注有NonIntercept不拦截特性将不拦截
+                    if (methodInfo.GetCustomAttribute<NonInterceptAttribute>() != null)
+                        continue;
+
                     //检查方法是否拦截 不需要拦截直接continue
                     if (!interceptPoint.InterceptPoint.IsVaildMethod(methodInfo))
                     {

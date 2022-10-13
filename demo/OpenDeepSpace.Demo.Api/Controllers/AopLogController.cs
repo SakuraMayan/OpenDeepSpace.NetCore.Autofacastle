@@ -22,6 +22,9 @@ namespace OpenDeepSpace.Demo.Api.Controllers
 
         private readonly ExternalService externalService;
 
+        /// <summary>
+        /// 
+        /// </summary>
         [HttpGet]
         public void Test()
         {
@@ -29,12 +32,27 @@ namespace OpenDeepSpace.Demo.Api.Controllers
             transientServiceAClassIntercept.BusinessException();
         }
 
+        /// <summary>
+        /// 测试不拦截
+        /// </summary>
+        [HttpGet]
+        public void TestNonIntercept()
+        {
+            transientServiceA.Business();
+        }
+
+        /// <summary>
+        /// 测试拦截点的拦截
+        /// </summary>
         [HttpGet]
         public void TestInterceptPoint()
         { 
             transientServiceB.Business();
         }
 
+        /// <summary>
+        /// 测试外部服务的拦截
+        /// </summary>
         [HttpGet]
         public void TestExternalServiceLog()
         { 

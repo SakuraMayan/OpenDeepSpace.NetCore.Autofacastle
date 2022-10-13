@@ -1,4 +1,5 @@
 ﻿using OpenDeepSpace.Demo.Service.Aop;
+using OpenDeepSpace.NetCore.Autofacastle.AspectAttention.Attributes;
 using OpenDeepSpace.NetCore.Autofacastle.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace OpenDeepSpace.Demo.Services.BasicInterfaceBatchInjection
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
+        //[NonIntercept]
         [LogBefore]
         [LogAfter]
         [LogAfterReturn]

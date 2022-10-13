@@ -1,4 +1,5 @@
-﻿using OpenDeepSpace.NetCore.Autofacastle.AspectAttention.Interceptor.Attributes;
+﻿using OpenDeepSpace.NetCore.Autofacastle.AspectAttention.Attributes;
+using OpenDeepSpace.NetCore.Autofacastle.AspectAttention.Interceptor.Attributes;
 using OpenDeepSpace.NetCore.Autofacastle.DependencyInjection.Attributes;
 using OpenDeepSpace.NetCore.Autofacastle.Extensions;
 using System;
@@ -51,6 +52,11 @@ namespace OpenDeepSpace.NetCore.Autofacastle.AspectAttention.Interceptor
 
                 foreach (var method in methodInfos)
                 {
+
+                    //如果方法上使用了不拦截特性将不被拦截
+                    if (method.GetCustomAttribute<NonInterceptAttribute>() != null)
+                        continue;
+
 
                     //获取所有attribute
                     var methodAttributes = method.GetCustomAttributes().SelectInterceptAttrs();
