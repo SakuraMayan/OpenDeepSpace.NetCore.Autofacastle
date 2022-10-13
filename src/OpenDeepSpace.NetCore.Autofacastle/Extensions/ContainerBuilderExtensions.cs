@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Builder;
+using Autofac.Core;
 using OpenDeepSpace.NetCore.Autofacastle.AspectAttention.InterceptorPoint;
 using OpenDeepSpace.NetCore.Autofacastle.DependencyInjection;
 using OpenDeepSpace.NetCore.Autofacastle.DependencyInjection.Attributes;
@@ -126,10 +127,9 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                     registrationBuilder = AsServiceForGenericType(type, transientAttr, registrationBuilder, service);
                                     //设置生命周期
                                     registrationBuilder.InstancePerDependency();
-                                    //配置拦截
-                                    if(IsConfigureIntercept)
-                                        registrationBuilder.AddIntercept(type);
+                                   
                                 }
+                                
                             }
                             else
                             {//未指定服务注入 查找实现的相关接口注入 
@@ -138,11 +138,12 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                     registrationBuilder = AsServiceForGenericType(type, transientAttr, registrationBuilder, service);
                                     //设置生命周期
                                     registrationBuilder.InstancePerDependency();
-                                    //配置拦截
-                                    if (IsConfigureIntercept)
-                                        registrationBuilder.AddIntercept(type);
+                                    
                                 }
                             }
+                            //配置拦截
+                            if (IsConfigureIntercept)
+                                registrationBuilder.AddIntercept(type);
                         }
 
 
@@ -160,10 +161,9 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
 
                                 //设置生命周期
                                 registrationBuilder.InstancePerDependency();
-                                //配置拦截
-                                if (IsConfigureIntercept)
-                                    registrationBuilder.AddIntercept(type);
+                                
                             }
+                            
                         }
                         else
                         {//未指定服务注入 查找实现的相关接口注入 
@@ -172,11 +172,12 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                 registrationBuilder = AsService(type, transientAttr, registrationBuilder, service);
                                 //设置生命周期
                                 registrationBuilder.InstancePerDependency();
-                                //配置拦截
-                                if (IsConfigureIntercept)
-                                    registrationBuilder.AddIntercept(type);
+                                
                             }
                         }
+                        //配置拦截
+                        if (IsConfigureIntercept)
+                            registrationBuilder.AddIntercept(type);
                     }
 
                 }
@@ -202,10 +203,9 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
 
                                     //设置生命周期
                                     registrationBuilder.InstancePerLifetimeScope();
-                                    //配置拦截
-                                    if (IsConfigureIntercept)
-                                        registrationBuilder.AddIntercept(type);
+                                   
                                 }
+                               
                             }
                             else
                             {//未指定服务注入 查找实现的相关接口注入 
@@ -214,11 +214,13 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                     registrationBuilder = AsServiceForGenericType(type, scopedAttr, registrationBuilder, service);
                                     //设置生命周期
                                     registrationBuilder.InstancePerLifetimeScope();
-                                    //配置拦截
-                                    if (IsConfigureIntercept)
-                                        registrationBuilder.AddIntercept(type);
+                                  
                                 }
+                                
                             }
+                            //配置拦截
+                            if (IsConfigureIntercept)
+                                registrationBuilder.AddIntercept(type);
                         }
 
 
@@ -236,10 +238,9 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
 
                                 //设置生命周期
                                 registrationBuilder.InstancePerLifetimeScope();
-                                //配置拦截
-                                if (IsConfigureIntercept)
-                                    registrationBuilder.AddIntercept(type);
+                                
                             }
+                            
                         }
                         else
                         {//未指定服务注入 查找实现的相关接口注入 
@@ -248,11 +249,12 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                 registrationBuilder = AsService(type, scopedAttr, registrationBuilder, service);
                                 //设置生命周期
                                 registrationBuilder.InstancePerLifetimeScope();
-                                //配置拦截
-                                if (IsConfigureIntercept)
-                                    registrationBuilder.AddIntercept(type);
+                               
                             }
                         }
+                        //配置拦截
+                        if (IsConfigureIntercept)
+                            registrationBuilder.AddIntercept(type);
                     }
                 }
 
@@ -277,10 +279,9 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
 
                                     //设置生命周期
                                     registrationBuilder.SingleInstance();
-                                    //配置拦截
-                                    if (IsConfigureIntercept)
-                                        registrationBuilder.AddIntercept(type);
+                                    
                                 }
+                               
                             }
                             else
                             {//未指定服务注入 查找实现的相关接口注入 
@@ -289,11 +290,13 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                     registrationBuilder = AsServiceForGenericType(type, singletonAttr, registrationBuilder, service);
                                     //设置生命周期
                                     registrationBuilder.SingleInstance();
-                                    //配置拦截
-                                    if (IsConfigureIntercept)
-                                        registrationBuilder.AddIntercept(type);
+                                    
                                 }
+                                
                             }
+                            //配置拦截
+                            if (IsConfigureIntercept)
+                                registrationBuilder.AddIntercept(type);
                         }
 
 
@@ -314,10 +317,9 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
 
                                 //设置生命周期
                                 registrationBuilder.SingleInstance();
-                                //配置拦截
-                                if (IsConfigureIntercept)
-                                    registrationBuilder.AddIntercept(type);
+                                
                             }
+                         
                         }
                         else
                         {//未指定服务注入 查找实现的相关接口注入 
@@ -328,12 +330,13 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                                     registrationBuilder.AutoActivate();//预加载
                                 //设置生命周期
                                 registrationBuilder.SingleInstance();
-                                //配置拦截
-                                if (IsConfigureIntercept)
-                                    registrationBuilder.AddIntercept(type);
-
+                               
                             }
+                            
                         }
+                        //配置拦截
+                        if (IsConfigureIntercept)
+                            registrationBuilder.AddIntercept(type);
                     }
                 }
             }
@@ -379,6 +382,12 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
         /// <param name="service"></param>
         private static IRegistrationBuilder<object, ReflectionActivatorData, DynamicRegistrationStyle> AsServiceForGenericType(Type type, DependencyInjectionAttribute? dependencyInjectionAttr, IRegistrationBuilder<object, ReflectionActivatorData, DynamicRegistrationStyle> registrationBuilder, Type service)
         {
+            
+            //如果直接获取的出来Ixxx<> FullName为空 
+            //针对泛型 FullName为空导致为非泛型 补充完整FullName 才能正确批量注入动态泛型
+            //例如(typeof(Ixxx<>),typeof(xxx()))
+            service = service.FixTypeReference();
+               
             //作为服务
             registrationBuilder.As(service);
 

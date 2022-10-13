@@ -4,8 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using OpenDeepSpace.Demo.Api.Filters;
 using OpenDeepSpace.Demo.Services.BasicAttributeBatchInjection;
 using OpenDeepSpace.Demo.Services.BasicInterfaceBatchInjection;
+using OpenDeepSpace.NetCore.Autofacastle;
 using OpenDeepSpace.NetCore.Autofacastle.DependencyInjection;
 using OpenDeepSpace.NetCore.Autofacastle.Extensions;
+using OpenDeepSpace.NetCore.Autofacastle.Reflection;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,14 +36,19 @@ builder.Services.AddSwaggerGen();
 
 });*/
 
-builder.Host.UseAutofacastle();
+//builder.Host.UseAutofacastle();
 
-builder.Host.ConfigureContainer<ContainerBuilder>(container => {
+//
+builder.Host.ConfigureContainer<ContainerBuilder>(container =>
+{
 
+    //自己传入程序集
+    var assemblies = AssemblyFinder.GetAllAssemblies().Where(assembly => !assembly.FullName.StartsWith("Microsoft") && !assembly.FullName.StartsWith("System"));
+    container.UseAutofacastle(assemblies: assemblies.ToList(), IsConfigureIntercept: true);
     //外部手动注入服务实例的添加拦截
     container.RegisterType(typeof(ExternalService)).AddIntercept(typeof(ExternalService));
 
-});
+}).UseServiceProviderFactory(new AutofacastleServiceProviderFactory());
 
 builder.Services.AddMvcCore(op => {
 

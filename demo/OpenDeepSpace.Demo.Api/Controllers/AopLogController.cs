@@ -34,6 +34,12 @@ namespace OpenDeepSpace.Demo.Api.Controllers
             transientServiceAClassIntercept.BusinessException();
         }
 
+        [HttpGet]
+        public void TestClassIntercept()
+        {
+            transientServiceAClassIntercept.BusinessException();
+        }
+
         /// <summary>
         /// 测试不拦截
         /// </summary>

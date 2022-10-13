@@ -23,7 +23,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
         /// <returns></returns>
         public static IRegistrationBuilder<object, ReflectionActivatorData, DynamicRegistrationStyle> AddIntercept(this IRegistrationBuilder<object, ReflectionActivatorData, DynamicRegistrationStyle> registrationBuilder, Type implementationType)
         {
-            var interceptedTypeInfo = AutofacastleCollection.InterceptedTypeInfos.FirstOrDefault(t => t.InterceptedType == implementationType);
+            var interceptedTypeInfo = AutofacastleCollection.InterceptedTypeInfos.FirstOrDefault(t => t.InterceptedType == implementationType && t.Intercepted==false);
             if (interceptedTypeInfo != null)
             {
                 if (interceptedTypeInfo.IsInterceptPointAbstractIntercept)
@@ -43,6 +43,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                         default:
                             break;
                     }
+                    interceptedTypeInfo.Intercepted = true;
                     return registrationBuilder;
                 }
 
@@ -64,9 +65,9 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                         default:
                             break;
                     }
+                    interceptedTypeInfo.Intercepted = true;
                 }
             }
-
             return registrationBuilder;
         }
 
@@ -78,7 +79,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
         /// <returns></returns>
         public static IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> AddIntercept(this IRegistrationBuilder<object, ConcreteReflectionActivatorData, SingleRegistrationStyle> registrationBuilder, Type implementationType)
         {
-            var interceptedTypeInfo = AutofacastleCollection.InterceptedTypeInfos.FirstOrDefault(t => t.InterceptedType == implementationType);
+            var interceptedTypeInfo = AutofacastleCollection.InterceptedTypeInfos.FirstOrDefault(t => t.InterceptedType == implementationType && t.Intercepted==false);
             if (interceptedTypeInfo != null)
             {
                 if (interceptedTypeInfo.IsInterceptPointAbstractIntercept)
@@ -98,6 +99,7 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                         default:
                             break;
                     }
+                    interceptedTypeInfo.Intercepted = true;
                     return registrationBuilder;
                 }
 
@@ -120,8 +122,8 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
                             break;
                     }
                 }
+                interceptedTypeInfo.Intercepted = true;
             }
-
             return registrationBuilder;
 
         }

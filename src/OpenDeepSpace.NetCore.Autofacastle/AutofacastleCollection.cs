@@ -47,5 +47,6 @@ namespace OpenDeepSpace.NetCore.Autofacastle
         /// 类拦截筛选器
         /// </summary>
         public static List<ClassInterceptSelector> ClassInterceptSelectors { get; set; } = new List<ClassInterceptSelector>();
+
     }
 }

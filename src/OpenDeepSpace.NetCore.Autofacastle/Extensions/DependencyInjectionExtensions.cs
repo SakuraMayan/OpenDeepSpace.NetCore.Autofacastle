@@ -62,7 +62,13 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
             if (dependencyInjectionAttribute != null && dependencyInjectionAttribute.Keyed != null)
             {
                 if (AutofacastleCollection.KeyedImplementationTypes.ContainsKey(dependencyInjectionAttribute.Keyed))
-                    throw new Exception($"已经存在一个相同的Keyed:{dependencyInjectionAttribute.Keyed}在{AutofacastleCollection.KeyedImplementationTypes[dependencyInjectionAttribute.Keyed]}类上");
+                {
+                    //不是同一类型
+                    if (AutofacastleCollection.KeyedImplementationTypes[dependencyInjectionAttribute.Keyed] != type)
+                        throw new Exception($"已经存在一个相同的Keyed:{dependencyInjectionAttribute.Keyed}在{AutofacastleCollection.KeyedImplementationTypes[dependencyInjectionAttribute.Keyed]}类上");
+                    else
+                        return;//是同一类型
+                }
                 AutofacastleCollection.KeyedImplementationTypes[dependencyInjectionAttribute.Keyed] = type;
             }
         }
@@ -78,7 +84,13 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Extensions
             if (dependencyInjectionAttribute != null && !string.IsNullOrWhiteSpace(dependencyInjectionAttribute.Named))
             {
                 if (AutofacastleCollection.NamedImplementationTypes.ContainsKey(dependencyInjectionAttribute.Named))
-                    throw new Exception($"已经存在一个相同的Named:{dependencyInjectionAttribute.Named}在{AutofacastleCollection.NamedImplementationTypes[dependencyInjectionAttribute.Named]}类上");
+                {
+                    //如果不是同一个类型
+                    if (AutofacastleCollection.NamedImplementationTypes[dependencyInjectionAttribute.Named] != type)
+                        throw new Exception($"已经存在一个相同的Named:{dependencyInjectionAttribute.Named}在{AutofacastleCollection.NamedImplementationTypes[dependencyInjectionAttribute.Named]}类上");
+                    else
+                        return;//是同一类型直接返回
+                }
                 AutofacastleCollection.NamedImplementationTypes[dependencyInjectionAttribute.Named] = type;
             }
         }

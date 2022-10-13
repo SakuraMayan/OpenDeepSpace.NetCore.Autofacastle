@@ -16,9 +16,9 @@ namespace OpenDeepSpace.Demo.Services.BasicInterfaceBatchInjection
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        [NonIntercept]
-        //[LogBefore]
-        //[LogAfter]
+        //[NonIntercept]
+        [LogBefore]
+        [LogAfter]
         public void Business()
         {
             Console.WriteLine($"{nameof(TransientServiceA)}.{nameof(Business)} Id:{Id}");

@@ -39,5 +39,10 @@ namespace OpenDeepSpace.NetCore.Autofacastle.AspectAttention
         /// 拦截类型
         /// </summary>
         public InterceptType InterceptType { get; set; } = InterceptType.ClassIntercept;
+
+        /// <summary>
+        /// 是否已经添加拦截 解决重复添加拦截错误
+        /// </summary>
+        public bool Intercepted { get; set; }
     }
 }
