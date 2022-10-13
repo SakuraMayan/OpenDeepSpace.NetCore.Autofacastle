@@ -109,6 +109,9 @@ namespace OpenDeepSpace.NetCore.Autofacastle.Reflection
                 }
             }
 
+            if (!list.Contains(Assembly.GetExecutingAssembly()))
+                list.Add(Assembly.GetExecutingAssembly());//加入当前程序集
+
             return list;
         }
 
