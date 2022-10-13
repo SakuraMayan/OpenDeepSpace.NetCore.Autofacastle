@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
+	  <PackageId>OpenDeepSpace.NetCore.Autofacastle</PackageId>
+	  <Version>1.0.0</Version>
+	  <Authors>OpenDeepSpace</Authors>
+	  <Company>OpenDeepSpaceTech</Company>
+	  <Product>OpenDeepSpaceNetCoreAutofacastle</Product>
+	  <Description>一个基于特性完成在NetCore原生容器中或Autofac容器中批量注入服务实例，以及完成NetCore容器中注入服务实例并且也会注入到Autofac容器中；并且基于特性的方式结合Autofac以及Castle实现AOP切面或叫横切关注点的实现以及轻松的使用</Description>
+	  <Copyright>MIT</Copyright>
+	  <PackageProjectUrl>https://github.com/SakuraMayan/OpenDeepSpace.NetCore.Autofacastle</PackageProjectUrl>
   </PropertyGroup>
 
 
