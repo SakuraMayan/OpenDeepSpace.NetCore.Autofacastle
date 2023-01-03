@@ -27,6 +27,9 @@ namespace Autofac.Extras.DynamicProxy
 
         private static readonly ProxyGenerator ProxyGenerator = new ProxyGenerator();
 
+        private static readonly object InterceptorsForGenericMethodCacheLock = new object();
+
+        private static readonly object lockobj=new object();
 
         /// <summary>
         /// Enable class interception on the target type. Interceptors will be determined
@@ -124,11 +127,7 @@ namespace Autofac.Extras.DynamicProxy
                     {
                         next(ctxt);
 
-                        if (!ctxt.Registration.Metadata.TryGetValue(InterceptorsForGenericMethodCache, out var _))
-                        {
-                            ctxt.Registration.Metadata.TryAdd(InterceptorsForGenericMethodCache, true);
-
-                        }
+                        registInterceptorsForGenericMethodCache(ctxt);
 
                         var interceptors = GetInterceptorServices(ctxt.Registration, ctxt.Instance.GetType())
                             .Select(ctxt.ResolveService)
@@ -243,11 +242,7 @@ namespace Autofac.Extras.DynamicProxy
                 {
                     next(ctxt);
 
-                    if (!ctxt.Registration.Metadata.TryGetValue(InterceptorsForGenericMethodCache, out var _))
-                    {
-                        ctxt.Registration.Metadata.TryAdd(InterceptorsForGenericMethodCache, true);
-
-                    }
+                    registInterceptorsForGenericMethodCache(ctxt);
 
                     var proxiedInterfaces = ctxt.Instance
                         .GetType()
@@ -285,6 +280,22 @@ namespace Autofac.Extras.DynamicProxy
 
 
             return (EnableProxy, registration);
+        }
+
+        private static void registInterceptorsForGenericMethodCache(ResolveRequestContext ctxt)
+        {
+
+            //防止并发访问 出现System.ArgumentException: An item with the same key has already been added. Key: Autofac.Extras.DynamicProxy.RegistrationExtensions.InterceptorsForGenericMethodCache
+            lock (InterceptorsForGenericMethodCacheLock)
+            {
+
+                if (!ctxt.Registration.Metadata.TryGetValue(InterceptorsForGenericMethodCache, out var _))
+                {
+                    ctxt.Registration.Metadata.Add(InterceptorsForGenericMethodCache, true);
+
+                }
+            }
+
         }
 
         /// <summary>
@@ -345,16 +356,21 @@ namespace Autofac.Extras.DynamicProxy
             IEnumerable<Service> interceptorServices,
             string metadataKey)
         {
-            object existing;
-            if (builder.RegistrationData.Metadata.TryGetValue(metadataKey, out existing))
-            {
-                builder.RegistrationData.Metadata[metadataKey] =
-                    ((IEnumerable<Service>)existing).Concat(interceptorServices).Distinct();
+            lock (lockobj)
+            { 
+            
+                object existing;
+                if (builder.RegistrationData.Metadata.TryGetValue(metadataKey, out existing))
+                {
+                    builder.RegistrationData.Metadata[metadataKey] =
+                        ((IEnumerable<Service>)existing).Concat(interceptorServices).Distinct();
+                }
+                else
+                {
+                    builder.RegistrationData.Metadata.Add(metadataKey, interceptorServices);
+                }
             }
-            else
-            {
-                builder.RegistrationData.Metadata.Add(metadataKey, interceptorServices);
-            }
+
         }
 
         /// <summary>
@@ -364,16 +380,21 @@ namespace Autofac.Extras.DynamicProxy
         /// <param name="interceptorType"></param>
         public static IComponentRegistration InterceptedBy(this IComponentRegistration builder, Type interceptorType)
         {
-            IEnumerable<Service> services = new Service[] { new TypedService(interceptorType) };
-            if (builder.Metadata.TryGetValue(InterceptorsPropertyName, out var existing))
-            {
-                builder.Metadata[InterceptorsPropertyName] = ((IEnumerable<Service>)existing).Concat(services).Distinct();
-                ;
+            lock (lockobj)
+            { 
+            
+                IEnumerable<Service> services = new Service[] { new TypedService(interceptorType) };
+                if (builder.Metadata.TryGetValue(InterceptorsPropertyName, out var existing))
+                {
+                    builder.Metadata[InterceptorsPropertyName] = ((IEnumerable<Service>)existing).Concat(services).Distinct();
+                    ;
+                }
+                else
+                {
+                    builder.Metadata.Add(InterceptorsPropertyName, services);
+                }
             }
-            else
-            {
-                builder.Metadata.Add(InterceptorsPropertyName, services);
-            }
+
 
             return builder;
         }
@@ -387,8 +408,13 @@ namespace Autofac.Extras.DynamicProxy
         /// <returns></returns>
         public static IComponentRegistration WithMetadata(this IComponentRegistration builder, string key, object value)
         {
-            builder.Metadata.Add(key, value);
-            return builder;
+            lock (lockobj)
+            { 
+                builder.Metadata.Add(key, value);
+                return builder;
+            
+            }
+
         }
 
         private static IEnumerable<Service> GetInterceptorServices(IComponentRegistration registration, Type implType)

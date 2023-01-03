@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;net6.0</TargetFrameworks>
 	  <PackageId>OpenDeepSpace.NetCore.Autofacastle</PackageId>
-	  <Version>1.1.0</Version>
+	  <Version>1.1.1</Version>
 	  <Authors>OpenDeepSpace</Authors>
 	  <Company>OpenDeepSpaceTech</Company>
 	  <Product>OpenDeepSpaceNetCoreAutofacastle</Product>
